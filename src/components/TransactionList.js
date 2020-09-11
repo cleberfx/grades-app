@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import GradeDataService from '../services/GradeService';
+import TransactionDataService from '../services/TransactionService';
 import { Link } from 'react-router-dom';
 
-const GradeList = () => {
-  const [grade, setGrade] = useState([]);
-  const [currentGrade, setCurrentGrade] = useState(null);
+const TransactionList = () => {
+  const [transaction, setTransaction] = useState([]);
+  const [currentTransaction, setCurrentTransaction] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [searchName, setSearchName] = useState('');
 
   useEffect(() => {
-    retrieveGrade();
+    retrieveTransaction();
   }, []);
 
   const onChangeSearchName = (e) => {
@@ -17,10 +17,10 @@ const GradeList = () => {
     setSearchName(searchName);
   };
 
-  const retrieveGrade = () => {
-    GradeDataService.getAll()
+  const retrieveTransaction = () => {
+    TransactionDataService.getAll()
       .then((response) => {
-        setGrade(response.data);
+        setTransaction(response.data);
         console.log(response.data);
       })
       .catch((e) => {
@@ -29,18 +29,18 @@ const GradeList = () => {
   };
 
   const refreshList = () => {
-    retrieveGrade();
-    setCurrentGrade(null);
+    retrieveTransaction();
+    setCurrentTransaction(null);
     setCurrentIndex(-1);
   };
 
-  const setActiveGrade = (grade, index) => {
-    setCurrentGrade(grade);
+  const setActiveTransaction = (transaction, index) => {
+    setCurrentTransaction(transaction);
     setCurrentIndex(index);
   };
 
-  const removeAllGrade = () => {
-    GradeDataService.removeAll()
+  const removeAllTransaction = () => {
+    TransactionDataService.removeAll()
       .then((response) => {
         console.log(response.data);
         refreshList();
@@ -51,9 +51,9 @@ const GradeList = () => {
   };
 
   const findByName = () => {
-    GradeDataService.findByName(searchName)
+    TransactionDataService.findByName(searchName)
       .then((response) => {
-        setGrade(response.data);
+        setTransaction(response.data);
         console.log(response.data);
       })
       .catch((e) => {
@@ -84,58 +84,61 @@ const GradeList = () => {
         </div>
       </div>
       <div className="col-md-6">
-        <h4>Grade List</h4>
+        <h4>Transaction List</h4>
 
         <ul className="list-group">
-          {grade &&
-            grade.map((grade, index) => (
+          {transaction &&
+            transaction.map((transaction, index) => (
               <li
                 className={
                   'list-group-item ' + (index === currentIndex ? 'active' : '')
                 }
-                onClick={() => setActiveGrade(grade, index)}
+                onClick={() => setActiveTransaction(transaction, index)}
                 key={index}
               >
-                {grade.name}
+                {transaction.name}
               </li>
             ))}
         </ul>
 
-        <button className="m-3 btn btn-sm btn-danger" onClick={removeAllGrade}>
+        <button
+          className="m-3 btn btn-sm btn-danger"
+          onClick={removeAllTransaction}
+        >
           Remove All
         </button>
       </div>
       <div className="col-md-6">
-        {currentGrade ? (
+        {currentTransaction ? (
           <div>
-            <h4>Grade</h4>
+            <h4>Transaction</h4>
             <div>
               <label>
                 <strong>Name:</strong>
               </label>{' '}
-              {currentGrade.name}
+              {currentTransaction.name}
             </div>
             <div>
               <label>
                 <strong>Subject:</strong>
               </label>{' '}
-              {currentGrade.subject}
+              {currentTransaction.subject}
             </div>
             <div>
               <label>
                 <strong>Type:</strong>
               </label>{' '}
-              {currentGrade.type}
+              {currentTransaction.type}
             </div>
             <div>
               <label>
                 <strong>Value:</strong>
               </label>{' '}
-              {currentGrade.value}
+              {currentTransaction.value}
             </div>
 
             <Link
-              to={'/grade/' + currentGrade.id}
+              to={'/transaction/' + currentTransaction.id}
               className="badge badge-warning"
             >
               Edit
@@ -144,7 +147,7 @@ const GradeList = () => {
         ) : (
           <div>
             <br />
-            <p>Please click on a Grade...</p>
+            <p>Please click on a Transaction...</p>
           </div>
         )}
       </div>
@@ -152,4 +155,4 @@ const GradeList = () => {
   );
 };
 
-export default GradeList;
+export default TransactionList;

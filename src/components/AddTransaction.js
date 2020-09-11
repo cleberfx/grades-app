@@ -1,36 +1,36 @@
 import React, { useState } from 'react';
-import GradeDataService from '../services/GradeService';
+import TransactionDataService from '../services/TransactionService.js';
 
-const AddGrade = () => {
-  const initialGradeState = {
+const AddTransaction = () => {
+  const initialTransactionState = {
     id: null,
-    name: '',
-    subject: '',
+    description: '',
+    category: '',
     type: '',
-    value: '',
+    value: 0,
   };
-  const [grade, setGrade] = useState(initialGradeState);
+  const [transaction, setTransaction] = useState(initialTransactionState);
   const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setGrade({ ...grade, [name]: value });
+    const { description, value } = event.target;
+    setTransaction({ ...transaction, [description]: value });
   };
 
-  const saveGrade = () => {
+  const saveTransaction = () => {
     var data = {
-      name: grade.name,
-      subject: grade.subject,
-      type: grade.type,
-      value: grade.value,
+      description: transaction.description,
+      category: transaction.category,
+      type: transaction.type,
+      value: transaction.value,
     };
 
-    GradeDataService.create(data)
+    TransactionDataService.create(data)
       .then((response) => {
-        setGrade({
+        setTransaction({
           id: response.data.id,
-          name: response.data.name,
-          subject: response.data.img,
+          description: response.data.description,
+          category: response.data.category,
           type: response.data.type,
           value: response.data.value,
         });
@@ -42,8 +42,8 @@ const AddGrade = () => {
       });
   };
 
-  const newGrade = () => {
-    setGrade(initialGradeState);
+  const newTransaction = () => {
+    setTransaction(initialTransactionState);
     setSubmitted(false);
   };
 
@@ -52,35 +52,35 @@ const AddGrade = () => {
       {submitted ? (
         <div>
           <h4>You submitted successfully!</h4>
-          <button className="btn btn-success" onClick={newGrade}>
+          <button className="btn btn-success" onClick={newTransaction}>
             Add
           </button>
         </div>
       ) : (
         <div>
           <div className="form-group">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="description">Name</label>
             <input
               type="text"
               className="form-control"
-              id="name"
+              id="description"
               required
-              value={grade.name}
+              value={transaction.description}
               onChange={handleInputChange}
-              name="name"
+              name="description"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="subject">Subject</label>
+            <label htmlFor="category">Subject</label>
             <input
               type="text"
               className="form-control"
-              id="subject"
+              id="category"
               required
-              value={grade.subject}
+              value={transaction.category}
               onChange={handleInputChange}
-              name="subject"
+              name="category"
             />
           </div>
           <div className="form-group">
@@ -90,7 +90,7 @@ const AddGrade = () => {
               className="form-control"
               id="type"
               required
-              value={grade.type}
+              value={transaction.type}
               onChange={handleInputChange}
               name="type"
             />
@@ -102,12 +102,12 @@ const AddGrade = () => {
               className="form-control"
               id="value"
               required
-              value={grade.value}
+              value={transaction.value}
               onChange={handleInputChange}
               name="value"
             />
           </div>
-          <button onClick={saveGrade} className="btn btn-success">
+          <button onClick={saveTransaction} className="btn btn-success">
             Submit
           </button>
         </div>
@@ -116,4 +116,4 @@ const AddGrade = () => {
   );
 };
 
-export default AddGrade;
+export default AddTransaction;

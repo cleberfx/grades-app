@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import GradeDataService from '../services/GradeService';
+import TransactionDataService from '../services/TransactionService.js';
 
-const Grade = (props) => {
-  const initialGradeState = {
+const Transaction = (props) => {
+  const initialTransactionState = {
     id: null,
-    name: '',
-    subject: '',
+    description: '',
+    category: '',
     type: '',
-    value: '',
+    value: 0,
   };
-  const [currentGrade, setCurrentGrade] = useState(initialGradeState);
+  const [currentTransaction, setCurrentTransaction] = useState(
+    initialTransactionState
+  );
   const [message, setMessage] = useState('');
 
-  const getGrade = (id) => {
-    GradeDataService.get(id)
+  const getTransaction = (id) => {
+    TransactionDataService.get(id)
       .then((response) => {
-        setCurrentGrade(response.data);
+        setCurrentTransaction(response.data);
         console.log(response.data);
       })
       .catch((e) => {
@@ -24,28 +26,28 @@ const Grade = (props) => {
   };
 
   useEffect(() => {
-    getGrade(props.match.params.id);
+    getTransaction(props.match.params.id);
   }, [props.match.params.id]);
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setCurrentGrade({ ...currentGrade, [name]: value });
+    const { description, value } = event.target;
+    setCurrentTransaction({ ...currentTransaction, [description]: value });
   };
 
-  const updateGrade = () => {
-    GradeDataService.update(currentGrade.id, currentGrade)
+  const updateTransaction = () => {
+    TransactionDataService.update(currentTransaction.id, currentTransaction)
       .then((response) => {
-        setMessage('The grade was updated successfully!');
+        setMessage('The transaction was updated successfully!');
       })
       .catch((e) => {
         console.log(e);
       });
   };
 
-  const deleteGrade = () => {
-    GradeDataService.remove(currentGrade.id)
+  const deleteTransaction = () => {
+    TransactionDataService.remove(currentTransaction.id)
       .then((response) => {
-        props.history.push('/grade');
+        props.history.push('/transaction');
       })
       .catch((e) => {
         console.log(e);
@@ -54,29 +56,29 @@ const Grade = (props) => {
 
   return (
     <div>
-      {currentGrade ? (
+      {currentTransaction ? (
         <div className="edit-form">
-          <h4>Grade</h4>
+          <h4>Transaction</h4>
           <form>
             <div className="form-group">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="description">Name</label>
               <input
                 type="text"
                 className="form-control"
-                id="name"
-                name="name"
-                value={currentGrade.name}
+                id="description"
+                name="description"
+                value={currentTransaction.description}
                 onChange={handleInputChange}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="subject">Subject</label>
+              <label htmlFor="category">Subject</label>
               <input
                 type="text"
                 className="form-control"
-                id="subject"
-                name="subject"
-                value={currentGrade.subject}
+                id="category"
+                name="category"
+                value={currentTransaction.category}
                 onChange={handleInputChange}
               />
             </div>
@@ -87,7 +89,7 @@ const Grade = (props) => {
                 className="form-control"
                 id="type"
                 name="type"
-                value={currentGrade.type}
+                value={currentTransaction.type}
                 onChange={handleInputChange}
               />
             </div>
@@ -98,20 +100,23 @@ const Grade = (props) => {
                 className="form-control"
                 id="value"
                 name="value"
-                value={currentGrade.value}
+                value={currentTransaction.value}
                 onChange={handleInputChange}
               />
             </div>
           </form>
 
-          <button className="badge badge-danger mr-2" onClick={deleteGrade}>
+          <button
+            className="badge badge-danger mr-2"
+            onClick={deleteTransaction}
+          >
             Delete
           </button>
 
           <button
             type="submit"
             className="badge badge-success"
-            onClick={updateGrade}
+            onClick={updateTransaction}
           >
             Update
           </button>
@@ -120,11 +125,11 @@ const Grade = (props) => {
       ) : (
         <div>
           <br />
-          <p>Please click on a Grade...</p>
+          <p>Please click on a Transaction...</p>
         </div>
       )}
     </div>
   );
 };
 
-export default Grade;
+export default Transaction;
