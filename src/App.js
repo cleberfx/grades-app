@@ -6,6 +6,7 @@ import './App.css';
 import AddTransaction from './components/AddTransaction';
 import Transaction from './components/Transaction';
 import TransactionList from './components/TransactionList';
+import PeriodAndCalculations from './components/PeriodAndCalculations';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             </li>
           </div>
         </nav>
+        <PeriodAndCalculations />
         <div className="container mt-3">
           <Switch>
             <Route
