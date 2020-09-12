@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import service from '../services/TransactionService';
+import PeriodAndCalculations from './PeriodAndCalculations';
 
 export default class TransactionSelect extends Component {
   constructor(props) {
@@ -53,6 +54,7 @@ export default class TransactionSelect extends Component {
           You have selected <strong>{this.state.name}</strong> whose id is{' '}
           <strong>{this.state.id}</strong>
         </p>
+        <PeriodAndCalculations yearMonth={this.state.name} />
       </div>
     );
   }
