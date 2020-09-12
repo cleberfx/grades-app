@@ -2,6 +2,7 @@ import http from '../http-common_2.js';
 
 const getAll = () => {
   return http.get('/transaction');
+  
 };
 
 const getAllByDate = (yearMonth) => {

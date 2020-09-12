@@ -51,7 +51,7 @@ const TransactionList = () => {
   };
 
   const findByName = () => {
-    TransactionDataService.findByDescription(searchName)
+    TransactionDataService.findByName(searchName)
       .then((response) => {
         setTransaction(response.data);
         console.log(response.data);

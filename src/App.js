@@ -6,7 +6,8 @@ import './App.css';
 import AddTransaction from './components/AddTransaction';
 import Transaction from './components/Transaction';
 import TransactionList from './components/TransactionList';
-import PeriodAndCalculations from './components/PeriodAndCalculations';
+// import PeriodAndCalculations from './components/PeriodAndCalculations';
+import TransactionSelect from './components/TransactionSelect';
 
 function App() {
   return (
@@ -29,14 +30,16 @@ function App() {
             </li>
           </div>
         </nav>
-        <PeriodAndCalculations />
+        {/* <PeriodAndCalculations /> */}
+        <TransactionSelect />
+
         <div className="container mt-3">
           <Switch>
-            <Route
+            {/* <Route
               exact
               path={['/', '/transaction']}
               component={TransactionList}
-            />
+            /> */}
             <Route exact path="/add" component={AddTransaction} />
             <Route path="/transaction/:id" component={Transaction} />
           </Switch>
