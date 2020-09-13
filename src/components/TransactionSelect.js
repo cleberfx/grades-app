@@ -3,6 +3,7 @@ import Select from 'react-select';
 import service from '../services/TransactionService';
 import PeriodAndCalculations from './PeriodAndCalculations';
 import TransactionSelectByYear from './TransactionSelectByYear';
+import PeriodAndCalculationsByFilterDescription from './PeriodAndCalculationsByFilterDescription';
 
 export default class TransactionSelect extends Component {
   constructor(props) {
@@ -57,6 +58,7 @@ export default class TransactionSelect extends Component {
         </p>
         <TransactionSelectByYear />
         <PeriodAndCalculations yearMonth={this.state.name} />
+        <PeriodAndCalculationsByFilterDescription yearMonth={this.state.name} />
       </div>
     );
   }

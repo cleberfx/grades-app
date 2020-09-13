@@ -5,11 +5,11 @@ const getAll = () => {
 };
 
 const getAllByDate = (yearMonth) => {
-  return http.get(`/transaction/${yearMonth}`);
+  return http.get(`/transaction/yearMonth/${yearMonth}`);
 };
 
 const getAllByYear = (year) => {
-  return http.get(`/transaction/${year}`);
+  return http.get(`/transaction/year/${year}`);
 };
 const get = (id) => {
   return http.get(`/transaction/${id}`);

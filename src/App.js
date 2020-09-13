@@ -8,6 +8,7 @@ import Transaction from './components/Transaction';
 // import TransactionList from './components/TransactionList';
 // import PeriodAndCalculations from './components/PeriodAndCalculations';
 import TransactionSelect from './components/TransactionSelect';
+// import PeriodAndCalculationsByFilterDescription from './components/PeriodAndCalculationsByFilterDescription';
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
         </nav>
         {/* <PeriodAndCalculations /> */}
         <TransactionSelect />
-        
+        {/* <PeriodAndCalculationsByFilterDescription /> */}
 
         <div className="container mt-3">
           <Switch>

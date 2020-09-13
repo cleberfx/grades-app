@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import service from '../services/TransactionService';
-import PeriodAndCalculations from './PeriodAndCalculations';
+import PeriodAndCalculationsByYear from './PeriodAndCalculationsByYear';
 
 export default class TransactionSelectByYear extends Component {
   constructor(props) {
@@ -54,7 +54,7 @@ export default class TransactionSelectByYear extends Component {
           You have selected <strong>{this.state.name}</strong> whose id is{' '}
           <strong>{this.state.id}</strong>
         </p>
-        <PeriodAndCalculations year={this.state.name} />
+        <PeriodAndCalculationsByYear year={this.state.name} />
       </div>
     );
   }

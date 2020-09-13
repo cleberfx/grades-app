@@ -3,8 +3,7 @@ import service from '../services/TransactionService';
 // import Select from 'react-select';
 
 export default function PeriodAndCalculations(props) {
-  const [yM, setYM] = useState(props.yearMonth);
-  // const [y, setY] = useState(props.year);
+  const [y, setY] = useState(props.year);
 
   const [resultAllByDate, setResultAllByDate] = useState(0);
   const [sumRecByDate, setSumRecByDate] = useState(0);
@@ -12,13 +11,12 @@ export default function PeriodAndCalculations(props) {
   const [saldo, setSaldo] = useState(0);
 
   useEffect(() => {
-    setYM(props.yearMonth);
-  }, [props.yearMonth]);
+    setY(props.year);
+  }, [props.year]);
+  console.log(y);
 
-  console.log(yM);
-
-  const allTransactionByDate = async () => {
-    const result = await (await service.getAllByDate(yM)).data.map(
+  const allTransactionByYear = async () => {
+    const result = await (await service.getAllByYear(y)).data.map(
       (transaction) => {
         return { value: transaction.value, type: transaction.type };
       }
@@ -55,10 +53,7 @@ export default function PeriodAndCalculations(props) {
     // setSumDesByDate(sumDespesas);
     setSaldo(sumRecByDate - sumDesByDate);
   };
-
-  allTransactionByDate();
-
-  
+  allTransactionByYear();
   return (
     <div>
       <p>{props.yearMonth}</p>
