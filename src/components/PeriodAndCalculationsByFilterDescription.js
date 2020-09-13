@@ -44,15 +44,19 @@ export default function PeriodAndCalculationsByFilterDescription(props) {
     console.log(resultReceitas);
     setSumRecByDate(resultReceitas);
 
-    const resultDespesas = result.filter((el) => {
+    const rs = result.filter((el) => {
       return el.description.toLowerCase().includes(input.toLocaleLowerCase());
     });
-    // const rs = resultDespesas.reduce((acumulador, valorAtual) => {
-    //   return acumulador + valorAtual.value;
-    // }, 0);
 
+    const resultDespesas = rs
+      .filter((el) => el.type === '-')
+      .reduce((acumulador, valorAtual) => {
+        return acumulador + valorAtual.value;
+      }, 0);
+
+    console.log(rs);
     console.log(resultDespesas);
-    // setSumDesByDate(resultDespesas);
+    setSumDesByDate(resultDespesas);
     // const sumReceitas = resultReceitas.reduce((acumulador, valorAtual) => {
     //   return acumulador + valorAtual.value;
     // }, 0);
