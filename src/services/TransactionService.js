@@ -2,13 +2,15 @@ import http from '../http-common_2.js';
 
 const getAll = () => {
   return http.get('/transaction');
-  
 };
 
 const getAllByDate = (yearMonth) => {
   return http.get(`/transaction/${yearMonth}`);
 };
 
+const getAllByYear = (year) => {
+  return http.get(`/transaction/${year}`);
+};
 const get = (id) => {
   return http.get(`/transaction/${id}`);
 };
@@ -40,6 +42,7 @@ const findByName = (description) => {
 export default {
   getAll,
   getAllByDate,
+  getAllByYear,
   get,
   create,
   update,

@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import Select from 'react-select';
 import service from '../services/TransactionService';
 import PeriodAndCalculations from './PeriodAndCalculations';
-import TransactionSelectByYear from './TransactionSelectByYear';
 
-export default class TransactionSelect extends Component {
+export default class TransactionSelectByYear extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +16,7 @@ export default class TransactionSelect extends Component {
   async getOptions() {
     const result = await service.getAll();
     const yM = result.data.map((transaction) => {
-      return transaction.yearMonth;
+      return transaction.year;
     });
     const uniqueSet = new Set(yM);
     let backToArray = [...uniqueSet];
@@ -55,8 +54,7 @@ export default class TransactionSelect extends Component {
           You have selected <strong>{this.state.name}</strong> whose id is{' '}
           <strong>{this.state.id}</strong>
         </p>
-        <TransactionSelectByYear />
-        <PeriodAndCalculations yearMonth={this.state.name} />
+        <PeriodAndCalculations year={this.state.name} />
       </div>
     );
   }

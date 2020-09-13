@@ -5,7 +5,7 @@ import './App.css';
 
 import AddTransaction from './components/AddTransaction';
 import Transaction from './components/Transaction';
-import TransactionList from './components/TransactionList';
+// import TransactionList from './components/TransactionList';
 // import PeriodAndCalculations from './components/PeriodAndCalculations';
 import TransactionSelect from './components/TransactionSelect';
 
@@ -32,6 +32,7 @@ function App() {
         </nav>
         {/* <PeriodAndCalculations /> */}
         <TransactionSelect />
+        
 
         <div className="container mt-3">
           <Switch>
